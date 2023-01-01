@@ -2,9 +2,9 @@
 
 GetComponent の結果をキャッシュしておくためのクラス
 
-# 使用例
+## 使用例
 
-## Before
+### Before
 
 ```cs
 using UnityEngine;
@@ -33,7 +33,7 @@ public class Example : MonoBehaviour
 }
 ```
 
-## After
+### After
 
 ```cs
 using Kogane;
@@ -41,7 +41,7 @@ using UnityEngine;
 
 public class Example : MonoBehaviour
 {
-    private ComponentCache<Rigidbody> m_rigidbodyCache;
+    private readonly GetComponentCache<Rigidbody> m_rigidbodyCache = new ();
 
     public Rigidbody rigidbody => m_rigidbodyCache.Get( gameObject );
 
@@ -49,5 +49,20 @@ public class Example : MonoBehaviour
     {
         Debug.Log( rigidbody );
     }
+}
+```
+
+## 種類
+
+```cs
+using Kogane;
+using UnityEngine;
+
+public class Example : MonoBehaviour
+{
+    private readonly GetComponentCache<Rigidbody>                m_cache1 = new ();
+    private readonly GetComponentInChildrenCache<Rigidbody>      m_cache2 = new ();
+    private readonly GetComponentInChildrenOrAddCache<Rigidbody> m_cache3 = new ();
+    private readonly GetOrAddComponentCache<Rigidbody>           m_cache4 = new ();
 }
 ```
